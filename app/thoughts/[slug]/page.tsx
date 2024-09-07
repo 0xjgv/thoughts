@@ -1,27 +1,27 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
-import { formatDate, getBlogPosts } from 'app/blog/utils'
+import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
 import { baseUrl } from 'app/sitemap'
 
 export async function generateStaticParams() {
-  let posts = getBlogPosts()
+  const posts = getThoughtPosts()
 
   return posts.map((post) => ({
-    slug: post.slug,
+    slug: post.slug
   }))
 }
 
 export function generateMetadata({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+  const post = getThoughtPosts().find((post) => post.slug === params.slug)
   if (!post) {
     return
   }
 
-  let {
+  const {
     title,
     publishedAt: publishedTime,
     summary: description,
-    image,
+    image
   } = post.metadata
   let ogImage = image
     ? image
@@ -35,24 +35,24 @@ export function generateMetadata({ params }) {
       description,
       type: 'article',
       publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: `${baseUrl}/thoughts/${post.slug}`,
       images: [
         {
-          url: ogImage,
-        },
-      ],
+          url: ogImage
+        }
+      ]
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: [ogImage],
-    },
+      images: [ogImage]
+    }
   }
 }
 
-export default function Blog({ params }) {
-  let post = getBlogPosts().find((post) => post.slug === params.slug)
+export default function Thoughts({ params }) {
+  const post = getThoughtPosts().find((post) => post.slug === params.slug)
 
   if (!post) {
     notFound()
@@ -66,7 +66,7 @@ export default function Blog({ params }) {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
+            '@type': 'ThoughtPost',
             headline: post.metadata.title,
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
@@ -74,12 +74,12 @@ export default function Blog({ params }) {
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
               : `/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/blog/${post.slug}`,
+            url: `${baseUrl}/thoughts/${post.slug}`,
             author: {
               '@type': 'Person',
-              name: 'My Portfolio',
-            },
-          }),
+              name: 'My Portfolio'
+            }
+          })
         }}
       />
       <h1 className="title font-semibold text-2xl tracking-tighter">

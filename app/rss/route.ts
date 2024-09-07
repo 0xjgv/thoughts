@@ -1,10 +1,10 @@
 import { baseUrl } from 'app/sitemap'
-import { getBlogPosts } from 'app/blog/utils'
+import { getThoughtPosts } from 'app/thoughts/utils'
 
 export async function GET() {
-  let allBlogs = await getBlogPosts()
+  const allThoughts = await getThoughtPosts()
 
-  const itemsXml = allBlogs
+  const itemsXml = allThoughts
     .sort((a, b) => {
       if (new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)) {
         return -1
@@ -15,7 +15,7 @@ export async function GET() {
       (post) =>
         `<item>
           <title>${post.metadata.title}</title>
-          <link>${baseUrl}/blog/${post.slug}</link>
+          <link>${baseUrl}/thoughts/${post.slug}</link>
           <description>${post.metadata.summary || ''}</description>
           <pubDate>${new Date(
             post.metadata.publishedAt
@@ -36,7 +36,7 @@ export async function GET() {
 
   return new Response(rssFeed, {
     headers: {
-      'Content-Type': 'text/xml',
-    },
+      'Content-Type': 'text/xml'
+    }
   })
 }
