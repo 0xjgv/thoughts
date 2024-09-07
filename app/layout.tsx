@@ -12,16 +12,16 @@ export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
     template: '%s | 0xjgv',
-    default: '0xjgv',
+    default: '0xjgv'
   },
-  description: 'Some thoughts & work.',
+  description: 'About me & some thoughts.',
   openGraph: {
-    description: 'Some thoughts & work.',
+    description: 'About me & some thoughts.',
     siteName: '0xjgv',
     title: '0xjgv',
     locale: 'en_US',
     type: 'website',
-    url: baseUrl,
+    url: baseUrl
   },
   robots: {
     index: true,
@@ -31,15 +31,15 @@ export const metadata: Metadata = {
       follow: true,
       'max-video-preview': -1,
       'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
+      'max-snippet': -1
+    }
+  }
 }
 
 const cx = (...classes) => classes.filter(Boolean).join(' ')
 
 export default function RootLayout({
-  children,
+  children
 }: {
   children: React.ReactNode
 }) {
