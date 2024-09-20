@@ -7,17 +7,17 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">About me</h1>
       <p className="mb-4 text-justify text-md">
         {
-          "Hi! I'm Juan, a father, husband, and sports enthusiast, who also happens to be a software engineer. My journey has led me through web development, data, and security, each shaping how I approach creating value in the digital world. Currently, I'm diving into the exciting world of AI/ML at "
+          "Hi! I'm Juan, a father, husband, and sports enthusiast. In my professional life, I'm a software engineer with a passion for web development, data, and security. Now, I'm exploring AI/ML at "
         }
         <Link href="https://www.epilot.cloud/en" className="text-blue-500">
           epilot
         </Link>
-        {", where I'm learning and growing every day."}
+        {", where every day brings new opportunities to learn and grow."}
       </p>
       <p className="mb-4 text-justify text-md">
         {
-          'At home, being a dad and husband has taught me that raising a family and building tech share a lot in common—patience, creativity, and embracing the unknown. Both keep me curious and eager to learn more.'
-        }
+          'In both my personal and professional life, I’ve found surprising parallels. Being a dad has taught me patience, creativity, and how to navigate the unknown—qualities that also drive my approach to building technology. Whether raising a family or creating tech solutions, both require constant learning, flexibility, and a deep curiosity for what comes next. These shared experiences fuel my passion for simplicity, security, and efficiency in everything I do.'
+          }
       </p>
       <div className="my-8 self-start">
         <ThoughtsPosts />
