@@ -6,6 +6,7 @@ type Metadata = {
   publishedAt: string
   summary: string
   image?: string
+  tags?: string[]
 }
 
 function parseFrontmatter(fileContent: string) {
@@ -14,14 +15,31 @@ function parseFrontmatter(fileContent: string) {
   let frontMatterBlock = match![1]
   let content = fileContent.replace(frontmatterRegex, '').trim()
   let frontMatterLines = frontMatterBlock.trim().split('\n')
-  let metadata: Partial<Metadata> = {}
+  let rawMetadata: { [key: string]: string } = {}
 
   frontMatterLines.forEach((line) => {
     let [key, ...valueArr] = line.split(': ')
-    let value = valueArr.join(': ').trim()
-    value = value.replace(/^['"](.*)['"]$/, '$1') // Remove quotes
-    metadata[key.trim() as keyof Metadata] = value
+    if (key) {
+      let value = valueArr.join(': ').trim()
+      value = value.replace(/^['"](.*)['"]$/, '$1') // Remove quotes
+      rawMetadata[key.trim()] = value
+    }
   })
+
+  let metadata: Partial<Metadata> = {
+    title: rawMetadata.title,
+    publishedAt: rawMetadata.publishedAt,
+    summary: rawMetadata.summary,
+    image: rawMetadata.image,
+    tags:
+      rawMetadata.tags && typeof rawMetadata.tags === 'string'
+        ? rawMetadata.tags.split(',').map((tag) => tag.trim())
+        : [] // Default to empty array
+  }
+
+  Object.keys(metadata).forEach(
+    (key) => metadata[key] === undefined && delete metadata[key]
+  )
 
   return { metadata: metadata as Metadata, content }
 }

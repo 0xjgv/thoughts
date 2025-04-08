@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
+import Link from 'next/link'
 
 export function ThoughtsPosts() {
   let allThoughts = getThoughtPosts()
@@ -29,6 +29,18 @@ export function ThoughtsPosts() {
                 {post.metadata.title}
               </p>
             </div>
+            {post.metadata.tags && post.metadata.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1 pt-1">
+                {post.metadata.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
           </Link>
         ))}
     </div>
