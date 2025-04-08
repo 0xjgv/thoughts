@@ -1,7 +1,7 @@
-import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
-import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
 import { baseUrl } from 'app/sitemap'
+import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
+import { notFound } from 'next/navigation'
 
 export async function generateStaticParams() {
   const posts = getThoughtPosts()
@@ -90,6 +90,18 @@ export default function Thoughts({ params }) {
           {formatDate(post.metadata.publishedAt)}
         </p>
       </div>
+      {post.metadata.tags && post.metadata.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1 mb-8">
+          {post.metadata.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-xs text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded-full"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
