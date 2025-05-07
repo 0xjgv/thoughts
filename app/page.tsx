@@ -7,9 +7,9 @@ export default function Page() {
       <p className="mb-4 text-justify text-md">
         Hi! I'm Juan, a father, husband, and sports enthusiast. In my
         professional life, I'm a software engineer with a passion for web
-        development, data, and security. Now, I'm exploring AI/ML in the
-        fascinating world of AI/ML, where every day brings new opportunities to
-        learn and grow.
+        development, data, and security. Now, I'm reexploring the fascinating
+        world of AI/ML, where every day brings new opportunities to learn and
+        grow.
       </p>
       <p className="mb-4 text-justify text-md">
         In both my personal and professional life, I've found surprising
