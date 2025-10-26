@@ -35,23 +35,29 @@ export function ThemeProvider({
     }
   }, [storageKey])
 
-  // Apply theme changes to the DOM
+  // Apply theme changes to the DOM and listen for system theme changes
   useEffect(() => {
     const root = window.document.documentElement
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
-    root.classList.remove('light', 'dark')
+    const applyTheme = () => {
+      root.classList.remove('light', 'dark')
 
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light'
-
-      root.classList.add(systemTheme)
-      return
+      if (theme === 'system') {
+        const systemTheme = mediaQuery.matches ? 'dark' : 'light'
+        root.classList.add(systemTheme)
+      } else {
+        root.classList.add(theme)
+      }
     }
 
-    root.classList.add(theme)
+    applyTheme()
+
+    // Listen for system theme changes when in system mode
+    if (theme === 'system') {
+      mediaQuery.addEventListener('change', applyTheme)
+      return () => mediaQuery.removeEventListener('change', applyTheme)
+    }
   }, [theme])
 
   const value = {
