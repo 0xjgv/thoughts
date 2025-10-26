@@ -30,9 +30,9 @@ export function ThemeProvider({
 
   useEffect(() => {
     setMounted(true)
-    const stored = localStorage.getItem(storageKey) as Theme | null
-    if (stored) {
-      setTheme(stored)
+    const stored = localStorage.getItem(storageKey)
+    if (stored && ['light', 'dark', 'system'].includes(stored)) {
+      setTheme(stored as Theme)
     }
   }, [storageKey])
 
