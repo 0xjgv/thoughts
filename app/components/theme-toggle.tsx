@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import { useTheme } from './theme-provider'
 
 function SunIcon() {
@@ -42,6 +43,17 @@ function MoonIcon() {
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  if (!mounted) {
+    return (
+      <div className="py-1 px-2 m-1 w-5 h-5" />
+    )
+  }
 
   const toggleTheme = () => {
     // Toggle between light and dark (we could add system later)
