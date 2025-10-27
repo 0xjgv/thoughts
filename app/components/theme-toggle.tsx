@@ -69,13 +69,15 @@ export function ThemeToggle() {
   const toggleTheme = () => {
     // Toggle between light and dark
     const isDark = theme === 'dark' || (theme === 'system' && systemPrefersDark)
-    setTheme(isDark ? 'light' : 'dark')
+    const newTheme = isDark ? 'light' : 'dark'
+    setTheme(newTheme)
   }
 
   const isDark = theme === 'dark' || (theme === 'system' && systemPrefersDark)
 
   return (
     <button
+      type="button"
       onClick={toggleTheme}
       className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 text-neutral-500"
       aria-label="Toggle theme"
