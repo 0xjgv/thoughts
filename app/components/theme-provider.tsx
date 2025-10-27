@@ -25,13 +25,13 @@ export function ThemeProvider({
   storageKey = 'thoughts-theme',
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme)
+  const [theme, setThemeState] = useState<Theme>(defaultTheme)
 
   // Initialize theme from localStorage on mount
   useEffect(() => {
     const stored = localStorage.getItem(storageKey)
     if (stored && ['light', 'dark', 'system'].includes(stored)) {
-      setTheme(stored as Theme)
+      setThemeState(stored as Theme)
     }
   }, [storageKey])
 
@@ -60,12 +60,14 @@ export function ThemeProvider({
     }
   }, [theme])
 
+  const setTheme = (newTheme: Theme) => {
+    localStorage.setItem(storageKey, newTheme)
+    setThemeState(newTheme)
+  }
+
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
-    },
+    setTheme,
   }
 
   return (
