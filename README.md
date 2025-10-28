@@ -14,10 +14,10 @@
 
 Develop the app:
 ```bash
-pnpm dev
+bun dev
 ```
 
 Deploy the app:
 ```bash
-pnpm deploy
+bun deploy
 ```
