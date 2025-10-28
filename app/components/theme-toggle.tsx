@@ -79,7 +79,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 text-neutral-500"
+      className="cursor-pointer transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 text-neutral-500"
       aria-label="Toggle theme"
     >
       {isDark ? <SunIcon /> : <MoonIcon />}
