@@ -60,15 +60,9 @@ export default function RootLayout({
             __html: `
               try {
                 const theme = localStorage.getItem('thoughts-theme');
-                if (theme === 'dark') {
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (theme === 'dark' || (!theme && prefersDark) || (theme === 'system' && prefersDark)) {
                   document.documentElement.classList.add('dark');
-                } else if (theme === 'light') {
-                  document.documentElement.classList.remove('dark');
-                } else {
-                  const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                  if (systemTheme === 'dark') {
-                    document.documentElement.classList.add('dark');
-                  }
                 }
               } catch (e) {}
             `,

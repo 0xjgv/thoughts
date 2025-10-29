@@ -42,38 +42,15 @@ function MoonIcon() {
 }
 
 export function ThemeToggle() {
-  const [systemPrefersDark, setSystemPrefersDark] = useState(false)
+  const { theme, setTheme, systemPrefersDark } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
 
-  useEffect(() => {
-    setMounted(true)
+  useEffect(() => setMounted(true), [])
 
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-    setSystemPrefersDark(mediaQuery.matches)
-
-    const handleChange = (e: MediaQueryListEvent) => {
-      setSystemPrefersDark(e.matches)
-    }
-
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
-
-  if (!mounted) {
-    return (
-      <div className="py-1 px-2 m-1 w-5 h-5" />
-    )
-  }
-
-  const toggleTheme = () => {
-    // Toggle between light and dark
-    const isDark = theme === 'dark' || (theme === 'system' && systemPrefersDark)
-    const newTheme = isDark ? 'light' : 'dark'
-    setTheme(newTheme)
-  }
+  if (!mounted) return <div className="py-1 px-2 m-1 w-5 h-5" />
 
   const isDark = theme === 'dark' || (theme === 'system' && systemPrefersDark)
+  const toggleTheme = () => setTheme(isDark ? 'light' : 'dark')
 
   return (
     <button
