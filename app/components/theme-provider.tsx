@@ -10,16 +10,25 @@ const ThemeContext = createContext<{
   systemPrefersDark: boolean
 } | undefined>(undefined)
 
-const STORAGE_KEY = 'thoughts-theme'
+function getCookie(name: string): string | null {
+  if (typeof document === 'undefined') return null
+  const value = `; ${document.cookie}`
+  const parts = value.split(`; ${name}=`)
+  if (parts.length === 2) return parts.pop()?.split(';').shift() || null
+  return null
+}
 
-function getStoredTheme(): Theme {
-  if (typeof window === 'undefined') return 'system'
-  const stored = localStorage.getItem(STORAGE_KEY)
-  return stored === 'light' || stored === 'dark' || stored === 'system' ? stored : 'system'
+function setCookie(name: string, value: string) {
+  document.cookie = `${name}=${value}; path=/; max-age=31536000; SameSite=Lax`
+}
+
+function getInitialTheme(): Theme {
+  const cookie = getCookie('theme')
+  return cookie === 'light' || cookie === 'dark' || cookie === 'system' ? cookie : 'system'
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(getStoredTheme)
+  const [theme, setThemeState] = useState<Theme>(getInitialTheme)
   const [systemPrefersDark, setSystemPrefersDark] = useState(false)
 
   // Track system preference and apply theme
@@ -42,7 +51,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   }, [theme])
 
   const setTheme = (newTheme: Theme) => {
-    localStorage.setItem(STORAGE_KEY, newTheme)
+    setCookie('theme', newTheme)
     setThemeState(newTheme)
   }
 
