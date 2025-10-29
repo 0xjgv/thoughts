@@ -25,15 +25,16 @@ export function ThemeProvider({
   storageKey = 'thoughts-theme',
   ...props
 }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<Theme>(defaultTheme)
-
-  // Initialize theme from localStorage on mount
-  useEffect(() => {
-    const stored = localStorage.getItem(storageKey)
-    if (stored && ['light', 'dark', 'system'].includes(stored)) {
-      setThemeState(stored as Theme)
+  const [theme, setThemeState] = useState<Theme>(() => {
+    // Initialize from localStorage immediately to prevent hydration mismatch
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem(storageKey)
+      if (stored && ['light', 'dark', 'system'].includes(stored)) {
+        return stored as Theme
+      }
     }
-  }, [storageKey])
+    return defaultTheme
+  })
 
   // Apply theme changes to the DOM and listen for system theme changes
   useEffect(() => {
@@ -41,13 +42,14 @@ export function ThemeProvider({
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
     const applyTheme = () => {
-      root.classList.remove('light', 'dark')
+      root.classList.remove('dark')
 
       if (theme === 'system') {
-        const systemTheme = mediaQuery.matches ? 'dark' : 'light'
-        root.classList.add(systemTheme)
-      } else {
-        root.classList.add(theme)
+        if (mediaQuery.matches) {
+          root.classList.add('dark')
+        }
+      } else if (theme === 'dark') {
+        root.classList.add('dark')
       }
     }
 
