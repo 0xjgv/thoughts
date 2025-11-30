@@ -2,7 +2,7 @@ import { ThoughtsPosts } from 'app/components/posts'
 
 export default function Page() {
   return (
-    <section className="flex flex-col items-center justify-center">
+    <section className="flex flex-col items-center justify-center animate-fade-in">
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">About me</h1>
       <p className="mb-4 text-justify text-md">
         Hi! I'm Juan, a father, husband, and sports enthusiast. In my

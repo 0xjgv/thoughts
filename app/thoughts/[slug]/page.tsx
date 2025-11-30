@@ -2,6 +2,8 @@ import { CustomMDX } from 'app/components/mdx'
 import { baseUrl } from 'app/sitemap'
 import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
 import { notFound } from 'next/navigation'
+import { ProgressBar } from 'app/components/progress-bar'
+import { TableOfContents } from 'app/components/table-of-contents'
 
 export async function generateStaticParams() {
   const posts = getThoughtPosts()
@@ -59,7 +61,8 @@ export default function Thoughts({ params }) {
   }
 
   return (
-    <section>
+    <section className="animate-fade-in">
+      <ProgressBar />
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -89,6 +92,9 @@ export default function Thoughts({ params }) {
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
+        <p className="text-sm text-neutral-500 dark:text-neutral-500">
+          {post.metadata.readingTime} min read
+        </p>
       </div>
       {post.metadata.tags && post.metadata.tags.length > 0 && (
         <div className="flex flex-wrap gap-1 mb-8">
@@ -102,6 +108,7 @@ export default function Thoughts({ params }) {
           ))}
         </div>
       )}
+      <TableOfContents />
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>

@@ -59,7 +59,9 @@ export function ThemeToggle() {
       className="cursor-pointer transition-all hover:text-neutral-800 dark:hover:text-neutral-200 flex align-middle relative py-1 px-2 m-1 text-neutral-500 focus:outline-none focus-visible:outline-none focus-visible:ring-0 focus:ring-0"
       aria-label="Toggle theme"
     >
-      {isDark ? <SunIcon /> : <MoonIcon />}
+      <span className="theme-toggle-icon">
+        {isDark ? <SunIcon /> : <MoonIcon />}
+      </span>
     </button>
   )
 }
