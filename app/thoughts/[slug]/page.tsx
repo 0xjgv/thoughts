@@ -13,8 +13,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }) {
-  const post = getThoughtPosts().find((post) => post.slug === params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = getThoughtPosts().find((post) => post.slug === slug)
   if (!post) {
     return
   }
@@ -53,8 +54,9 @@ export function generateMetadata({ params }) {
   }
 }
 
-export default function Thoughts({ params }) {
-  const post = getThoughtPosts().find((post) => post.slug === params.slug)
+export default async function Thoughts({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = getThoughtPosts().find((post) => post.slug === slug)
 
   if (!post) {
     notFound()
