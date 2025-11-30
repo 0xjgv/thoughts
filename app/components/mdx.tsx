@@ -58,7 +58,9 @@ function Pre({ children, ...props }) {
   const codeElement = React.Children.toArray(children).find(
     (child) => React.isValidElement(child) && child.type === Code
   )
-  const rawCode = React.isValidElement(codeElement) ? codeElement.props.children : ''
+  const rawCode = React.isValidElement(codeElement)
+    ? (codeElement.props as { children?: string }).children || ''
+    : ''
 
   return (
     <CodeBlock code={rawCode}>
