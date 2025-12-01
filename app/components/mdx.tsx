@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { highlight } from 'sugar-high'
 import React from 'react'
+import { CodeBlock } from './code-block'
 
 function Table({ data }) {
   let headers = data.headers.map((header, index) => (
@@ -53,6 +54,21 @@ function Code({ children, ...props }) {
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
 }
 
+function Pre({ children, ...props }) {
+  const codeElement = React.Children.toArray(children).find(
+    (child) => React.isValidElement(child) && child.type === Code
+  )
+  const rawCode = React.isValidElement(codeElement)
+    ? (codeElement.props as { children?: string }).children || ''
+    : ''
+
+  return (
+    <CodeBlock code={rawCode}>
+      <pre {...props}>{children}</pre>
+    </CodeBlock>
+  )
+}
+
 function slugify(str) {
   return str
     .toString()
@@ -96,6 +112,7 @@ let components = {
   Image: RoundedImage,
   a: CustomLink,
   code: Code,
+  pre: Pre,
   Table,
 }
 
