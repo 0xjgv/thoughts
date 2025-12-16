@@ -50,7 +50,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       title,
       description,
       images: [ogImage]
-    }
+    },
+    alternates: {
+      canonical: `${baseUrl}/thoughts/${post.slug}`,
+    },
   }
 }
 
@@ -71,19 +74,59 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
-            '@type': 'ThoughtPost',
+            '@type': 'BlogPosting',
             headline: post.metadata.title,
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
             description: post.metadata.summary,
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
-              : `/og?title=${encodeURIComponent(post.metadata.title)}`,
+              : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
             url: `${baseUrl}/thoughts/${post.slug}`,
             author: {
               '@type': 'Person',
-              name: 'My Portfolio'
+              name: 'Juan',
+              url: baseUrl
+            },
+            publisher: {
+              '@type': 'Person',
+              name: 'Juan',
+              url: baseUrl
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': `${baseUrl}/thoughts/${post.slug}`
             }
+          })
+        }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: baseUrl
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Thoughts',
+                item: `${baseUrl}/thoughts`
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: post.metadata.title,
+                item: `${baseUrl}/thoughts/${post.slug}`
+              }
+            ]
           })
         }}
       />
