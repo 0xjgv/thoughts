@@ -19,7 +19,7 @@ bun start    # Run production server
 
 ## Project Structure
 
-```
+```markdown
 app/
 ├── components/    # Reusable components (nav, footer, theme-*)
 ├── lib/           # Utilities (theme.ts)
@@ -27,6 +27,18 @@ app/
 ├── og/, rss/      # API routes (OG images, RSS feed)
 └── layout.tsx     # Root layout with metadata
 ```
+
+## Voice & Tone
+
+This is a corner of the internet where we overthink things in public. Our voice:
+
+- **Self-aware** - acknowledge the absurdity of what we do
+- **Relatable** - speak to engineers who've been there at 3 AM
+- **Humble** - professional overthinker, not guru
+- **Warm** - like chatting with a colleague over coffee
+- **Smart casual** - thoughtful without being pretentious
+
+Write as if your audience is principal/staff engineers from SF who appreciate wit and substance in equal measure. No corporate speak, no jargon for jargon's sake.
 
 ## Code Patterns
 
