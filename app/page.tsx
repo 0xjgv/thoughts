@@ -14,7 +14,7 @@ export default function Page() {
       <p className="mb-4 text-justify text-md">
         In both my personal and professional life, I've found surprising
         parallels. Being a dad has taught me patience, creativity, and how to
-        be patient.
+        be patient (😂).
       </p>
       <div className="my-8 self-start">
         <ThoughtsPosts />
