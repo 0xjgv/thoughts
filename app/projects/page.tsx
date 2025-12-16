@@ -1,9 +1,25 @@
 import { getProjects } from './utils'
 import Link from 'next/link'
+import { baseUrl } from 'app/sitemap'
+import type { Metadata } from 'next'
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Some things I have built.'
+  description: 'Some things I have built.',
+  openGraph: {
+    title: 'Projects',
+    description: 'Some things I have built.',
+    type: 'website',
+    url: `${baseUrl}/projects`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Projects',
+    description: 'Some things I have built.',
+  },
+  alternates: {
+    canonical: `${baseUrl}/projects`,
+  },
 }
 
 function ArrowIcon() {
@@ -15,6 +31,7 @@ function ArrowIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className="inline-block ml-1"
+      aria-hidden="true"
     >
       <path
         d="M2.07102 11.3494L0.963068 10.2415L9.2017 1.98864H2.83807L2.85227 0.454545H11.8438V9.46023H10.2955L10.3097 3.09659L2.07102 11.3494Z"
@@ -33,8 +50,39 @@ export default function ProjectsPage() {
     return (a.metadata.order || 0) - (b.metadata.order || 0)
   })
 
+  // Generate structured data for projects
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Projects',
+    description: 'Some things I have built.',
+    url: `${baseUrl}/projects`,
+    mainEntity: {
+      '@type': 'ItemList',
+      itemListElement: sortedProjects.map((project, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@type': 'SoftwareApplication',
+          name: project.metadata.title,
+          description: project.metadata.description,
+          ...(project.metadata.url && { url: project.metadata.url }),
+          ...(project.metadata.github && {
+            codeRepository: project.metadata.github
+          }),
+          applicationCategory: 'WebApplication',
+        },
+      })),
+    },
+  }
+
   return (
     <section className="animate-fade-in">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">Projects</h1>
       {sortedProjects.length === 0 ? (
         <p className="text-neutral-600 dark:text-neutral-400">

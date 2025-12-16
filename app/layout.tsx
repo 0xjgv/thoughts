@@ -35,7 +35,13 @@ export const metadata: Metadata = {
       'max-image-preview': 'large',
       'max-snippet': -1
     }
-  }
+  },
+  alternates: {
+    canonical: baseUrl,
+    types: {
+      'application/rss+xml': `${baseUrl}/rss`,
+    },
+  },
 }
 
 const cx = (...classes) => classes.filter(Boolean).join(' ')
@@ -60,9 +66,17 @@ export default async function RootLayout({
     >
       <body className="antialiased max-w-xl mx-auto p-3 min-h-screen">
         <ThemeProvider>
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-neutral-900 focus:text-white dark:focus:bg-white dark:focus:text-black focus:rounded-md focus:outline-none"
+          >
+            Skip to main content
+          </a>
           <main className="flex-auto min-w-0 flex flex-col justify-center p-3">
             <Navbar />
-            {children}
+            <div id="main-content">
+              {children}
+            </div>
             <Footer />
             <Analytics />
             <SpeedInsights />

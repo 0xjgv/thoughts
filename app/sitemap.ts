@@ -1,4 +1,5 @@
 import { getThoughtPosts } from 'app/thoughts/utils'
+import { getProjects } from 'app/projects/utils'
 
 export const baseUrl = 'https://0xjgv.vercel.app'
 
@@ -8,7 +9,8 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt
   }))
 
-  const routes = ['', '/thoughts'].map((route) => ({
+  // Include projects page in sitemap
+  const routes = ['', '/thoughts', '/projects'].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0]
   }))

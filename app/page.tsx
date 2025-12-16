@@ -1,8 +1,44 @@
 import { ThoughtsPosts } from 'app/components/posts'
+import { baseUrl } from './sitemap'
 
 export default function Page() {
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Juan',
+    url: baseUrl,
+    jobTitle: 'Software Engineer',
+    knowsAbout: ['Web Development', 'Data', 'Security', 'AI/ML'],
+    sameAs: [
+      'https://github.com/0xjgv',
+      'https://www.linkedin.com/in/jgv/',
+    ],
+  }
+
+  const websiteSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: '0xjgv',
+    url: baseUrl,
+    description: 'About me & some thoughts.',
+    author: {
+      '@type': 'Person',
+      name: 'Juan',
+    },
+  }
+
   return (
     <section className="flex flex-col items-center justify-center animate-fade-in">
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">About me</h1>
       <p className="mb-4 text-justify text-md">
         Hi! I'm Juan, a father, husband, and sports enthusiast. In my
