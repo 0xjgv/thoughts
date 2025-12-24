@@ -11,7 +11,7 @@ I've been thinking about code review lately. Not the "LGTM ship it" kind, but th
 
 Here's the thing that's been bugging me: we treat review as a gate. Pass or fail. Approved or request changes. But that's not really what's happening, is it?
 
-When a reviewer says "this won't work because X," they're not just blocking you—they're telling you *how* to improve. They're giving you a direction. And if you squint at that process just right, something clicks.
+When a reviewer says "this won't work because X," they're not just blocking you. They're telling you *how* to improve. They're giving you a direction. And if you squint at that process just right, something clicks.
 
 Review is a gradient.
 
@@ -27,7 +27,7 @@ review:    (plan, objective) → (score, feedback)
 implement: (plan, codebase) → new codebase
 ```
 
-The key is that `review` returns two things: a score (good enough or not) and feedback (what's wrong and how to fix it). That feedback—let's call it δ—is the gradient. It points toward a better plan.
+The key is that `review` returns two things: a score (good enough or not) and feedback (what's wrong and how to fix it). That feedback (let's call it δ) is the gradient. It points toward a better plan.
 
 So the planning loop becomes:
 
@@ -71,7 +71,7 @@ Of course, loops need to end. And not just when you succeed. I've been thinking 
 - **Success**: score ≥ threshold. Ship it.
 - **Budget exceeded**: we've iterated too many times. Time to make a call.
 - **Plateau**: still improving, but not enough to matter. Break the problem down.
-- **Stuck**: same feedback twice. We can't incorporate it—escalate.
+- **Stuck**: same feedback twice. We can't incorporate it, so escalate.
 - **Regression**: getting worse. Something's broken in how we're incorporating feedback.
 
 Each failure mode has a different response. Budget exceeded? Human decision. Plateau? Decompose into smaller objectives. Stuck? Escalate to someone with different context.
@@ -92,13 +92,13 @@ objective → refine → research → plan
                     (back to review)
 ```
 
-The inner loop only touches the plan. Objective and research stay fixed. You're not re-understanding the problem each iteration—you're just improving your approach to solving it.
+The inner loop only touches the plan. Objective and research stay fixed. You're not re-understanding the problem each iteration. You're just improving your approach to solving it.
 
 ### So What?
 
 Maybe I'm overthinking this. (It's what we do here.) But I keep coming back to one insight:
 
-**Review isn't just a gate—it's the loss function gradient.**
+**Review isn't just a gate. It's the loss function gradient.**
 
 The δ tells you *how* to improve, not just *whether* to improve. And the better you can structure and act on that feedback, the faster you converge.
 
