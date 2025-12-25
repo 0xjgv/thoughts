@@ -1,109 +1,60 @@
 ---
-summary: 'What if code review is secretly a gradient descent algorithm in disguise?'
+summary: 'The feedback loop that makes agentic coding work is just gradient descent in disguise.'
 title: 'The Gradient'
 publishedAt: '2025-01-15'
-tags: optimization, feedback loops, code review, automation
+tags: agentic coding, optimization, feedback loops, automation
 ---
 
 ## The Gradient
 
-I've been thinking about code review lately. Not the "LGTM ship it" kind, but the actual mechanics of what happens when someone says "this approach won't scale" or "have you considered the auth edge case?"
+We treat review as a gate. Pass or fail. But that's not what's happening.
 
-Here's the thing that's been bugging me: we treat review as a gate. Pass or fail. Approved or request changes. But that's not really what's happening, is it?
-
-When a reviewer says "this won't work because X," they're not just blocking you. They're telling you *how* to improve. They're giving you a direction. And if you squint at that process just right, something clicks.
+When feedback says "this won't scale" or "you missed the auth case," it's not just blocking. It's pointing somewhere. It's telling you *how* to improve, not just *whether* to improve.
 
 Review is a gradient.
 
-### The Optimization Loop
+### The Agentic Loop
 
-Bear with me while I get a little formal. Here's how I've started thinking about the coding workflow:
+Here's the workflow, whether the agent is human or machine:
 
 ```
 refine:    objective → clearer objective
 research:  (objective, codebase) → relevant context
 plan:      (objective, context) → implementation steps
-review:    (plan, objective) → (score, feedback)
+review:    (plan, objective) → (score, δ)
 implement: (plan, codebase) → new codebase
 ```
 
-The key is that `review` returns two things: a score (good enough or not) and feedback (what's wrong and how to fix it). That feedback (let's call it δ) is the gradient. It points toward a better plan.
-
-So the planning loop becomes:
+The key: `review` returns a score and a δ (delta). The δ is the gradient. It points toward a better plan.
 
 ```
 while score(plan) < threshold:
     plan = plan ⊕ δ
 ```
 
-Where ⊕ means "incorporate the feedback." Simple, right?
+Where ⊕ means "incorporate the feedback."
 
-### Where the Magic Hides
+### The ⊕ Operator
 
-Here's what I've realized: the ⊕ operator is where all the productivity gains live.
+This is where the leverage lives.
 
-Most of us do ⊕ the slow way: read the feedback, internalize it, think hard, try again. It's manual. It depends on our experience and intuition. It works, but it doesn't scale.
-
-But what if we could structure δ better? What if feedback came with categories?
+Most agents (human or otherwise) do ⊕ the slow way: parse the feedback, reason about it, try again. But what if δ came structured?
 
 ```
 δ = {
   type:    missing | incorrect | unclear | scope
-  target:  what part of the plan is wrong
-  signal:  what's wrong about it
-  suggest: potential fix (optional)
+  target:  what part of the plan
+  signal:  what's wrong
 }
 ```
 
 Now ⊕ becomes mechanical:
 
-- **missing** → add the missing requirement
+- **missing** → add the requirement
 - **incorrect** → substitute the right approach
-- **unclear** → force clarification on the ambiguous part
-- **scope** → narrow down to what actually matters
+- **unclear** → force clarification
+- **scope** → narrow to what matters
 
-The more structured your feedback, the more automatable your improvement loop becomes. This is the bridge from "experienced engineer intuition" to "systematic process that juniors can follow."
+The better you structure δ, the more mechanical ⊕ becomes. The more mechanical ⊕ becomes, the more you can automate.
 
-### The Termination Problem
-
-Of course, loops need to end. And not just when you succeed. I've been thinking about what makes us halt:
-
-- **Success**: score ≥ threshold. Ship it.
-- **Budget exceeded**: we've iterated too many times. Time to make a call.
-- **Plateau**: still improving, but not enough to matter. Break the problem down.
-- **Stuck**: same feedback twice. We can't incorporate it, so escalate.
-- **Regression**: getting worse. Something's broken in how we're incorporating feedback.
-
-Each failure mode has a different response. Budget exceeded? Human decision. Plateau? Decompose into smaller objectives. Stuck? Escalate to someone with different context.
-
-### The Whiteboard Version
-
-If you had to explain this over coffee, here's what I'd draw:
-
-```
-objective → refine → research → plan
-                                  ↓
-                              review
-                                  ↓
-                    good enough? ──yes──→ implement
-                         ↓ no
-                    incorporate δ
-                         ↓
-                    (back to review)
-```
-
-The inner loop only touches the plan. Objective and research stay fixed. You're not re-understanding the problem each iteration. You're just improving your approach to solving it.
-
-### So What?
-
-Maybe I'm overthinking this. (It's what we do here.) But I keep coming back to one insight:
-
-**Review isn't just a gate. It's the loss function gradient.**
-
-The δ tells you *how* to improve, not just *whether* to improve. And the better you can structure and act on that feedback, the faster you converge.
-
-Next time someone leaves a review comment, pay attention to what kind of feedback it is. Is it telling you something's missing? Incorrect? Unclear? Out of scope? That category alone tells you how to respond.
-
-Your competitive advantage isn't just in how well you code. It's in how efficiently you turn feedback into improvement.
-
-That's the ⊕ operator. Get good at it.
+That's the whole game. Structure your feedback, and the improvement loop runs itself.
