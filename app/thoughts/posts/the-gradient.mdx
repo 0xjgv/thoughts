@@ -34,9 +34,11 @@ while score(plan) < threshold:
 
 Where ⊕ means "incorporate the feedback."
 
+Implementation gets its own loop too (tests, linters, humans), but iterating on plans is cheaper. That's where the leverage is.
+
 ### The ⊕ Operator
 
-This is where the leverage lives.
+This is where it gets interesting.
 
 Most agents (human or otherwise) do ⊕ the slow way: parse the feedback, reason about it, try again. But what if δ came structured?
 
