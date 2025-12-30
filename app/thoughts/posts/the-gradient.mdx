@@ -1,0 +1,62 @@
+---
+summary: 'The feedback loop that makes agentic coding work is just gradient descent in disguise.'
+title: 'The Gradient'
+publishedAt: '2026-01-01'
+tags: agentic coding, optimization, feedback loops, automation
+---
+
+## The Gradient
+
+Review is a gradient, not a gate.
+
+Think about a GPS. When you miss a turn, it doesn't just say "wrong." It says "recalculating" and points you toward the destination. The feedback has direction. That's what makes it useful.
+
+Code review works the same way. "This won't scale" isn't just a rejection. It's pointing somewhere: toward a better architecture, a different data structure, a cache you forgot. The δ between where you are and where you need to be.
+
+### The Agentic Loop
+
+Here's the workflow, whether the agent is human or machine:
+
+```
+refine:    objective → clearer objective
+research:  (objective, codebase) → relevant context
+plan:      (objective, context) → implementation steps
+review:    (plan, objective) → (score, δ)
+implement: (plan, codebase) → new codebase
+```
+
+The key: `review` returns a score and a δ (delta). The δ is the gradient. It points toward a better plan.
+
+```
+while score(plan) < threshold:
+    plan = plan ⊕ δ
+```
+
+Where ⊕ means "incorporate the feedback."
+
+Implementation gets its own loop too (tests, linters, humans), but iterating on plans is cheaper. That's where the leverage is.
+
+### The ⊕ Operator
+
+This is where it gets interesting.
+
+Most agents (human or otherwise) do ⊕ the slow way: parse the feedback, reason about it, try again. But what if δ came structured?
+
+```
+δ = {
+  type:    missing | incorrect | unclear | scope
+  target:  what part of the plan
+  signal:  what's wrong
+}
+```
+
+Now ⊕ becomes mechanical:
+
+- **missing** → add the requirement
+- **incorrect** → substitute the right approach
+- **unclear** → force clarification
+- **scope** → narrow to what matters
+
+The better you structure δ, the more mechanical ⊕ becomes. The more mechanical ⊕ becomes, the more you can automate.
+
+That's the whole game. Structure your feedback, and the improvement loop runs itself.
