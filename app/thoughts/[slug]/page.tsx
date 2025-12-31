@@ -2,7 +2,6 @@ import { CustomMDX } from 'app/components/mdx'
 import { baseUrl } from 'app/sitemap'
 import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
 import { notFound } from 'next/navigation'
-import { ProgressBar } from 'app/components/progress-bar'
 import { TableOfContents } from 'app/components/table-of-contents'
 
 export async function generateStaticParams() {
@@ -67,7 +66,6 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
 
   return (
     <section className="animate-fade-in">
-      <ProgressBar />
       <script
         type="application/ld+json"
         suppressHydrationWarning
