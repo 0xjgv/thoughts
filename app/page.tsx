@@ -1,4 +1,5 @@
 import { ThoughtsPosts } from 'app/components/posts'
+import { Newsletter } from 'app/components/newsletter'
 import { baseUrl } from './sitemap'
 
 export default function Page() {
@@ -21,7 +22,7 @@ export default function Page() {
     '@type': 'WebSite',
     name: '0xjgv',
     url: baseUrl,
-    description: 'My corner of the internet where I overthink things in public.',
+    description: 'Thoughts on the messy reality of building products—the decisions, trade-offs, and lessons nobody talks about.',
     author: {
       '@type': 'Person',
       name: 'Juan',
@@ -43,8 +44,10 @@ export default function Page() {
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">About me</h1>
       <p className="mb-4 text-justify text-md">
         Hi! I'm Juan—father, husband, sports enthusiast, and professional
-        overthinker. By day, I wrangle code as a product engineer, diving into
-        product development, data, and security.
+        overthinker. I write about the messy reality of building products—the
+        decisions, trade-offs, and lessons nobody talks about. By day, I wrangle
+        code as a product engineer, diving into product development, data, and
+        security.
       </p>
       <p className="mb-4 text-justify text-md">
         Turns out being a dad and being an engineer have more in common than
@@ -52,6 +55,9 @@ export default function Page() {
         with unpredictable behavior, and the ability to explain things in five
         different ways until something clicks.
       </p>
+      <div className="my-8 w-full">
+        <Newsletter />
+      </div>
       <div className="my-8 self-start">
         <ThoughtsPosts />
       </div>
