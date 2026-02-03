@@ -1,22 +1,36 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
 export function Newsletter() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<Status>('idle')
+  const visitorId = useRef<string>('')
+
+  useEffect(() => {
+    import('@fingerprintjs/fingerprintjs').then((FingerprintJS) =>
+      FingerprintJS.load().then((fp) =>
+        fp.get().then((result) => {
+          visitorId.current = result.visitorId
+        })
+      )
+    )
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    const form = e.target as HTMLFormElement
+    if (form.querySelector<HTMLInputElement>('[name="url"]')?.value) return
+
     setStatus('loading')
 
     try {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email, visitorId: visitorId.current }),
       })
 
       if (response.ok || response.status === 409) {
@@ -49,6 +63,14 @@ export function Newsletter() {
         <label htmlFor="newsletter-email" className="sr-only">
           Email address
         </label>
+        <input
+          type="text"
+          name="url"
+          className="hidden"
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+        />
         <input
           type="email"
           name="email"
