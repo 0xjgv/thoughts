@@ -17,10 +17,13 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
   const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`
 
   const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(url)
+    const showCopied = () => {
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
+    }
+
+    try {
+      await navigator.clipboard.writeText(url)
     } catch {
       // Fallback for older browsers
       const textArea = document.createElement('textarea')
@@ -29,9 +32,9 @@ export function ShareButtons({ title, url }: ShareButtonsProps) {
       textArea.select()
       document.execCommand('copy')
       document.body.removeChild(textArea)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
     }
+
+    showCopied()
   }
 
   return (
