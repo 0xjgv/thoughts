@@ -19,11 +19,15 @@ export function Newsletter() {
     )
   }, [])
 
+  const submitting = useRef(false)
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     const form = e.target as HTMLFormElement
     if (form.querySelector<HTMLInputElement>('[name="url"]')?.value) return
+    if (submitting.current || !visitorId.current) return
 
+    submitting.current = true
     setStatus('loading')
 
     try {
@@ -41,6 +45,8 @@ export function Newsletter() {
       }
     } catch {
       setStatus('error')
+    } finally {
+      submitting.current = false
     }
   }
 
