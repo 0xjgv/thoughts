@@ -8,6 +8,7 @@ type Metadata = {
   image?: string
   tags?: string[]
   readingTime?: number
+  featured?: boolean
 }
 
 function parseFrontmatter(fileContent: string) {
@@ -35,7 +36,8 @@ function parseFrontmatter(fileContent: string) {
     tags:
       rawMetadata.tags && typeof rawMetadata.tags === 'string'
         ? rawMetadata.tags.split(',').map((tag) => tag.trim())
-        : [] // Default to empty array
+        : [], // Default to empty array
+    featured: rawMetadata.featured === 'true'
   }
 
   Object.keys(metadata).forEach(

@@ -6,8 +6,10 @@
     "start": "next start"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^5.0.1",
     "@tailwindcss/postcss": "^4.1.16",
     "@vercel/analytics": "^1.5.0",
+    "@vercel/kv": "^3.0.0",
     "@vercel/speed-insights": "^1.2.0",
     "geist": "1.2.2",
     "next": "^16.0.7",

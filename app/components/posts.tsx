@@ -8,6 +8,10 @@ export function ThoughtsPosts() {
     <div className="animate-stagger">
       {allThoughts
         .sort((a, b) => {
+          // Featured posts come first
+          if (a.metadata.featured && !b.metadata.featured) return -1
+          if (!a.metadata.featured && b.metadata.featured) return 1
+          // Then sort by date
           if (
             new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
           ) {
@@ -25,8 +29,20 @@ export function ThoughtsPosts() {
               <p className="text-neutral-600 dark:text-neutral-400 w-[175px] tabular-nums">
                 {formatDate(post.metadata.publishedAt, false)}
               </p>
-              <p className="text-neutral-900 dark:text-neutral-100 tracking-tight flex-1">
-                {post.metadata.title}
+              <p className="text-neutral-900 dark:text-neutral-100 tracking-tight flex-1 flex flex-col">
+                <span className="flex items-center gap-2">
+                  {post.metadata.title}
+                  {post.metadata.featured && (
+                    <span className="text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 px-1.5 py-0.5 rounded">
+                      Featured
+                    </span>
+                  )}
+                </span>
+                {post.metadata.summary && (
+                  <span className="text-sm text-neutral-500 dark:text-neutral-400 font-normal">
+                    {post.metadata.summary}
+                  </span>
+                )}
               </p>
               <p className="text-neutral-500 dark:text-neutral-500 text-sm tabular-nums">
                 {post.metadata.readingTime} min
