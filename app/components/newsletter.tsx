@@ -13,25 +13,20 @@ export function Newsletter() {
     setStatus('loading')
 
     try {
-      const response = await fetch(
-        'https://buttondown.com/api/emails/embed-subscribe/0xjgv',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams({ email }).toString()
-        }
-      )
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
 
-      if (response.ok || response.redirected) {
+      if (response.ok || response.status === 409) {
         setStatus('success')
         setEmail('')
       } else {
         setStatus('error')
       }
     } catch {
-      // CORS error likely means the request went through (Buttondown redirects)
-      setStatus('success')
-      setEmail('')
+      setStatus('error')
     }
   }
 
@@ -39,7 +34,7 @@ export function Newsletter() {
     return (
       <div className="w-full py-6 px-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-800">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          Thanks for subscribing! Check your email to confirm.
+          Thanks for subscribing! You&apos;re on the list.
         </p>
       </div>
     )
