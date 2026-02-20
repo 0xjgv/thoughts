@@ -19,6 +19,11 @@ const navItems = {
 export function Navbar() {
   const pathname = usePathname()
 
+  const isPathActive = (path: string) => {
+    if (path === '/') return pathname === path
+    return pathname === path || pathname.startsWith(`${path}/`)
+  }
+
   return (
     <aside className="-ml-[8px] mb-16 tracking-tight">
       <div className="lg:sticky lg:top-20">
@@ -29,7 +34,7 @@ export function Navbar() {
         >
           <div className="flex flex-row items-center space-x-0 pr-10">
             {Object.entries(navItems).map(([path, { name }]) => {
-              const isActive = pathname === path
+              const isActive = isPathActive(path)
               return (
                 <Link
                   key={path}
