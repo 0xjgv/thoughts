@@ -7,16 +7,27 @@ type Status = 'idle' | 'loading' | 'success' | 'error'
 export function Newsletter() {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState<Status>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
   const visitorId = useRef<string>('')
 
   useEffect(() => {
-    import('@fingerprintjs/fingerprintjs').then((FingerprintJS) =>
-      FingerprintJS.load().then((fp) =>
-        fp.get().then((result) => {
+    let mounted = true
+
+    import('@fingerprintjs/fingerprintjs')
+      .then((FingerprintJS) => FingerprintJS.load())
+      .then((fp) => fp.get())
+      .then((result) => {
+        if (mounted) {
           visitorId.current = result.visitorId
-        })
-      )
-    )
+        }
+      })
+      .catch(() => {
+        visitorId.current = ''
+      })
+
+    return () => {
+      mounted = false
+    }
   }, [])
 
   const submitting = useRef(false)
@@ -25,16 +36,22 @@ export function Newsletter() {
     e.preventDefault()
     const form = e.target as HTMLFormElement
     if (form.querySelector<HTMLInputElement>('[name="url"]')?.value) return
-    if (submitting.current || !visitorId.current) return
+    if (submitting.current) return
 
     submitting.current = true
     setStatus('loading')
+    setErrorMessage('')
 
     try {
+      const payload: { email: string; visitorId?: string } = { email }
+      if (visitorId.current) {
+        payload.visitorId = visitorId.current
+      }
+
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, visitorId: visitorId.current }),
+        body: JSON.stringify(payload),
       })
 
       if (response.ok || response.status === 409) {
@@ -42,9 +59,15 @@ export function Newsletter() {
         setEmail('')
       } else {
         setStatus('error')
+        if (response.status === 429) {
+          setErrorMessage('Too many attempts. Please try again in a bit.')
+        } else {
+          setErrorMessage('Something went wrong. Please try again.')
+        }
       }
     } catch {
       setStatus('error')
+      setErrorMessage('Something went wrong. Please try again.')
     } finally {
       submitting.current = false
     }
@@ -62,8 +85,11 @@ export function Newsletter() {
 
   return (
     <div className="w-full py-6 px-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-800">
-      <p className="text-sm text-neutral-600 dark:text-neutral-400 mb-4">
-        Get notified when I publish new thoughts—no spam, just signal.
+      <p className="text-sm text-neutral-600 dark:text-neutral-400">
+        Get notified when I publish new thoughts.
+      </p>
+      <p className="text-xs text-neutral-500 dark:text-neutral-400 mb-4">
+        About one email a month. No spam. Unsubscribe anytime.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
         <label htmlFor="newsletter-email" className="sr-only">
@@ -97,8 +123,12 @@ export function Newsletter() {
         </button>
       </form>
       {status === 'error' && (
-        <p className="text-sm text-red-600 dark:text-red-400 mt-2">
-          Something went wrong. Please try again.
+        <p
+          className="text-sm text-red-600 dark:text-red-400 mt-2"
+          role="status"
+          aria-live="polite"
+        >
+          {errorMessage}
         </p>
       )}
     </div>

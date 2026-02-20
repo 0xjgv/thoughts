@@ -55,11 +55,11 @@ export default function Page() {
         with unpredictable behavior, and the ability to explain things in five
         different ways until something clicks.
       </p>
-      <div className="my-8 w-full">
-        <Newsletter />
-      </div>
       <div className="my-8 self-start">
         <ThoughtsPosts />
+      </div>
+      <div className="my-8 w-full">
+        <Newsletter />
       </div>
     </section>
   )

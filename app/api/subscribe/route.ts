@@ -29,13 +29,15 @@ function checkIpRate(ip: string): boolean {
 
 export async function POST(request: Request) {
   try {
-    const { email, visitorId } = await request.json()
+    const body = await request.json()
+    const rawVisitorId = body?.visitorId
+    const email = body?.email
 
     if (!email || typeof email !== 'string' || !EMAIL_REGEX.test(email)) {
       return Response.json({ error: 'Invalid email address' }, { status: 400 })
     }
 
-    if (!visitorId || typeof visitorId !== 'string') {
+    if (rawVisitorId !== undefined && typeof rawVisitorId !== 'string') {
       return Response.json({ error: 'Invalid request' }, { status: 400 })
     }
 
@@ -48,6 +50,8 @@ export async function POST(request: Request) {
 
     const normalized = email.toLowerCase().trim()
     const key = `subscriber:${normalized}`
+    const visitorId =
+      typeof rawVisitorId === 'string' ? rawVisitorId.slice(0, 128) : ''
 
     const existing = await kv.exists(key)
     if (existing) {
@@ -66,7 +70,7 @@ export async function POST(request: Request) {
         country: h.get('x-vercel-ip-country') || '',
         city: h.get('x-vercel-ip-city') || '',
         region: h.get('x-vercel-ip-country-region') || '',
-        visitorId,
+        ...(visitorId ? { visitorId } : {}),
       }),
       kv.zadd('subscribers', { score: now, member: normalized }),
     ])
