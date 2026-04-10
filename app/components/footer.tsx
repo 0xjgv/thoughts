@@ -58,7 +58,7 @@ export default function Footer() {
             className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100"
             rel="noopener noreferrer"
             target="_blank"
-            href="https://0xjgv.github.io/cv/"
+            href="https://raw.githubusercontent.com/0xjgv/cv/refs/heads/main/CV-Juan-Gaitan.pdf"
           >
             <ArrowIcon />
             <p className="ml-2 h-7">resume</p>
