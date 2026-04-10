@@ -1,7 +1,7 @@
 import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
 import Link from 'next/link'
 
-export function ThoughtsPosts() {
+export function ThoughtsPosts({ limit }: { limit?: number } = {}) {
   let allThoughts = getThoughtPosts()
 
   return (
@@ -19,6 +19,7 @@ export function ThoughtsPosts() {
           }
           return 1
         })
+        .slice(0, limit)
         .map((post) => (
           <Link
             key={post.slug}

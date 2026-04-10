@@ -1,4 +1,3 @@
-import { Newsletter } from 'app/components/newsletter'
 import { ThoughtsPosts } from 'app/components/posts'
 
 export const metadata = {
@@ -11,9 +10,6 @@ export default function Page() {
     <section className="animate-fade-in">
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">Thoughts</h1>
       <ThoughtsPosts />
-      <div className="mt-8">
-        <Newsletter />
-      </div>
     </section>
   )
 }

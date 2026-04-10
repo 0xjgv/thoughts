@@ -1,0 +1,70 @@
+---
+summary: 'Retrying is search. Healing is policy change. Search is cheap. Policy change is dangerous.'
+title: "Self-Correcting Isn't Self-Healing"
+publishedAt: '2026-04-10'
+tags: agents, learning, harness, self-healing
+featured: true
+---
+
+## Self-Correcting Isn't Self-Healing
+
+A lot of people talk about AI agents as if they are on the verge of becoming organisms. They aren't. But the comparison is useful, because it points to a real distinction.
+
+Agents today are increasingly good at self-correction. They hit an error, inspect the result, try again, and continue. A tool call fails, so they change the parameters. A plan stalls, so they re-route. A chain of reasoning breaks, so they backtrack and produce another one. This is already valuable. In practice, a lot of competence is just the ability not to stop at the first obstacle.
+
+But self-correction is different from self-healing.
+
+Self-healing would mean something stricter: the agent runs into an error, tries another path, checks whether the new path worked, and then updates itself so it does not keep falling into the same hole. Not merely recovering from failure, but learning from failure.
+
+That sounds like a small upgrade. It isn't. It's the difference between a person who improvises well and a person who actually gets wiser.
+
+Most of the excitement around agents quietly assumes this second property is near at hand. The agent fails, retries, succeeds, and now somehow has become better. But that last step does not happen automatically. Success on the second try is not the same as learning. It may just mean the system got lucky on the second draw.
+
+This is where the optimistic story starts to wobble.
+
+The appealing version goes like this: every error becomes an investment.
+
+The agent fails once, discovers a better method, records the lesson, and never pays that cost again. Over time, the system becomes more economical. It wastes less motion. It compounds its own experience. Run it long enough across enough edge cases, and you get something that looks less like software and more like accumulated judgment.
+
+That is the dream.
+
+The problem is that reality is messier than the slogan.
+
+First, there is almost no such thing as "the same error again." Real failures do not usually repeat — they recur in families. An API timeout, a rate limit, a schema mismatch, and an authentication failure may all belong to the same broader class of problem: bad assumptions about external tools.
+
+A system that memorizes one fix too literally has not healed. It has just cached a workaround.
+
+Second, learning requires deciding what counts as a lesson. Suppose an agent hits an error, tries a different method, and succeeds. What exactly should it remember? Is the first method bad? Is the second better? Is it only under some hidden condition that the second is safer? From one success, you usually can't tell. A lot of "self-healing" proposals are really just proposals to let the system rewrite itself based on anecdotal evidence.
+
+There is another problem hidden inside this one. Before the system can learn from an error, it has to ask where the error came from. Not every failure is really the agent's fault. Sometimes the agent made a bad inference. But sometimes the tool was unclear, the API was underspecified, the harness passed bad context, or the environment changed underneath everything. A vague tool description can produce the same outward failure as a bad decision. So can a harness that withholds state, truncates context, or rewards shallow retries.
+
+This matters because the remedy depends on the source. If the agent chose badly, maybe it should update its strategy. If the tool contract was ambiguous, the tool should be fixed. If the harness framed the task badly, the orchestration should change. If the environment was noisy, the right lesson may be to avoid overlearning from a one-off event.
+
+Without this step, "self-healing" turns into superstition. The system sees a failure, stumbles into a recovery, and then writes the wrong lesson into memory. A lot of what looks like agent learning is really infrastructure failure wearing the mask of agent failure.
+
+Humans do this, too, of course. We all form superstitions from small samples. The difference is that we are already familiar with human irrationality. When a machine does it, people tend to call it intelligence.
+
+Third, there is a hidden cost problem. People describe self-healing as economical, and it can be. But only if the learning generalizes. Otherwise, you are just building a larger and larger pile of local patches: retry rules, exception notes, memory snippets, special-case policies. The system looks more experienced, but also more fragile. It becomes like an old codebase that "knows" how to survive only because no one dares touch half the conditionals.
+
+So the missing capability in agents is probably not self-healing in the biological sense. That metaphor is too flattering. What they really need is something more prosaic and more difficult: reliable error abstraction and correct error attribution.
+
+Not: "This worked once, remember it."
+But: "What kind of mistake was this, which layer produced it, what changed when I recovered, and under what conditions should that become part of future behavior?"
+
+That is much harder than retrying. Retrying is a search. Healing is a policy change. Search is cheap. Policy change is dangerous.
+
+This is why current agents are better described as recoverers than learners. They are often good at continuing. They are still weak at converting local recoveries into stable, transferable improvements.
+
+And yet that is still the interesting direction.
+
+Imagine a system that can do both well. It encounters failures across months or years, not minutes. It groups them into types. It distinguishes noise from signal. It promotes only robust fixes into long-term behavior. It becomes cheaper because it no longer pays repeatedly for the same class of mistake. It becomes calmer because it has fewer avoidable failures. Over time, it develops something we usually reserve for experienced people: a taste for what kind of fix is likely to hold.
+
+That would be powerful. Not because it would never fail, but because its failures would become progressively less stupid.
+
+The danger is assuming we get there just by adding memory to retries.
+
+Memory is not learning. A note is not an abstraction. A workaround is not healing.
+
+The hard problem is not getting agents to try again.
+
+The hard problem is getting them to know what, if anything, they have earned the right to remember.

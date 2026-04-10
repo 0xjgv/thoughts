@@ -1,33 +1,13 @@
 import { ThoughtsPosts } from 'app/components/posts'
-import { Newsletter } from 'app/components/newsletter'
 import Link from 'next/link'
 import { baseUrl } from './sitemap'
 
 export default function Page() {
-  const hardDecisions = [
+  const highlights = [
     {
-      slug: 'research-design-plan-implement',
-      title: 'Research → Design → Plan → Implement',
-      problem: 'How do we ship medium-size features without blowing up context?',
-      options: 'Ad hoc coding vs. a phased loop with explicit checkpoints.',
-      tradeoff: 'Fast starts often create expensive rework and context thrash.',
-      decision: 'Use a 4-step workflow to keep quality and throughput stable.',
-    },
-    {
-      slug: 'the-fire-chief',
-      title: 'The Fire Chief',
-      problem: 'How do teams solve high-risk problems without one fragile bet?',
-      options: 'One big push vs. many coordinated small pushes.',
-      tradeoff: 'Big pushes are simple to explain but brittle in execution.',
-      decision: 'Coordinate many safe efforts to converge on one outcome.',
-    },
-    {
-      slug: 'leaks',
-      title: 'Leaks',
-      problem: 'How do we diagnose product problems that dashboards hide?',
-      options: 'Internal instrumentation only vs. direct user observation.',
-      tradeoff: 'Telemetry scales, but distance can hide root causes.',
-      decision: 'Go to the source: observe users where problems happen.',
+      slug: 'self-correcting-isnt-self-healing',
+      title: "Self-Correcting Isn't Self-Healing",
+      hook: 'On the difference between an agent that recovers and one that actually learns.',
     },
   ]
 
@@ -50,7 +30,7 @@ export default function Page() {
     '@type': 'WebSite',
     name: '0xjgv',
     url: baseUrl,
-    description: 'Thoughts on the messy reality of building products—the decisions, trade-offs, and lessons nobody talks about.',
+    description: 'Thoughts on the messy reality of building products: the decisions, trade-offs, and lessons that don\'t usually make it into the docs.',
     author: {
       '@type': 'Person',
       name: 'Juan',
@@ -71,27 +51,27 @@ export default function Page() {
       />
       <h1 className="mb-8 text-2xl font-semibold tracking-tighter">About me</h1>
       <p className="mb-4 text-justify text-md">
-        Hi! I'm Juan—father, husband, sports enthusiast, and professional
-        overthinker. I write about the messy reality of building products—the
-        decisions, trade-offs, and lessons nobody talks about. By day, I wrangle
-        code as a product engineer, diving into product development, data, and
-        security.
+        Hi, I'm Juan. Father, husband, sports enthusiast, and professional
+        overthinker. I spend most of my time building products as an engineer,
+        somewhere between product development, data, and security. This is where
+        I share what I'm learning along the way: the decisions, the trade-offs,
+        and the lessons that don't usually make it into the docs.
       </p>
       <p className="mb-4 text-justify text-md">
         Turns out being a dad and being an engineer have more in common than
-        you'd think: both require debugging mysterious issues at 3 AM, patience
+        you'd think. Both require debugging mysterious issues at 3 AM, patience
         with unpredictable behavior, and the ability to explain things in five
         different ways until something clicks.
       </p>
       <div className="my-8 w-full">
         <h2 className="mb-2 text-xl font-semibold tracking-tight">
-          Start Here: Hard Decisions
+          Start here
         </h2>
         <p className="mb-4 text-sm text-neutral-600 dark:text-neutral-400">
-          Problem, options, tradeoffs, decision. No fluff.
+          If you only read one thing, make it this :)
         </p>
         <div className="space-y-3">
-          {hardDecisions.map((item) => (
+          {highlights.map((item) => (
             <Link
               key={item.slug}
               href={`/thoughts/${item.slug}`}
@@ -100,40 +80,9 @@ export default function Page() {
               <p className="font-medium text-neutral-900 dark:text-neutral-100">
                 {item.title}
               </p>
-              <div className="mt-2 space-y-1 text-sm">
-                <p>
-                  <span className="text-neutral-500 dark:text-neutral-400">
-                    Problem:
-                  </span>{' '}
-                  <span className="text-neutral-700 dark:text-neutral-200">
-                    {item.problem}
-                  </span>
-                </p>
-                <p>
-                  <span className="text-neutral-500 dark:text-neutral-400">
-                    Options:
-                  </span>{' '}
-                  <span className="text-neutral-700 dark:text-neutral-200">
-                    {item.options}
-                  </span>
-                </p>
-                <p>
-                  <span className="text-neutral-500 dark:text-neutral-400">
-                    Tradeoff:
-                  </span>{' '}
-                  <span className="text-neutral-700 dark:text-neutral-200">
-                    {item.tradeoff}
-                  </span>
-                </p>
-                <p>
-                  <span className="text-neutral-500 dark:text-neutral-400">
-                    Decision:
-                  </span>{' '}
-                  <span className="text-neutral-700 dark:text-neutral-200">
-                    {item.decision}
-                  </span>
-                </p>
-              </div>
+              <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+                {item.hook}
+              </p>
             </Link>
           ))}
         </div>
@@ -147,10 +96,7 @@ export default function Page() {
         </p>
       </div>
       <div className="my-8 self-start">
-        <ThoughtsPosts />
-      </div>
-      <div className="my-8 w-full">
-        <Newsletter />
+        <ThoughtsPosts limit={3} />
       </div>
     </section>
   )
