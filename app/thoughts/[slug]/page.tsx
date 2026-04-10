@@ -1,5 +1,4 @@
 import { CustomMDX } from 'app/components/mdx'
-import { Newsletter } from 'app/components/newsletter'
 import { ShareButtons } from 'app/components/share-buttons'
 import { baseUrl } from 'app/sitemap'
 import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
@@ -162,9 +161,6 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
           title={post.metadata.title}
           url={`${baseUrl}/thoughts/${post.slug}`}
         />
-      </div>
-      <div className="mt-8">
-        <Newsletter />
       </div>
     </section>
   )
