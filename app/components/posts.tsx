@@ -35,11 +35,6 @@ export function ThoughtsPosts({ limit }: { limit?: number } = {}) {
                   <span className="transition-colors group-hover:text-neutral-600 dark:group-hover:text-neutral-300">
                     {post.metadata.title}
                   </span>
-                  {post.metadata.featured && (
-                    <span className="text-xs text-neutral-500 dark:text-neutral-500">
-                      Featured
-                    </span>
-                  )}
                 </span>
                 {post.metadata.summary && (
                   <span className="text-sm leading-6 text-neutral-500 dark:text-neutral-400 font-normal">

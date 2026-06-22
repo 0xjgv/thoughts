@@ -30,7 +30,7 @@ export default function Page() {
     '@type': 'WebSite',
     name: '0xjgv',
     url: baseUrl,
-    description: 'Thoughts on the messy reality of building products: the decisions, trade-offs, and lessons that don\'t usually make it into the docs.',
+    description: 'Notes on agents, security, product decisions, and the gap between demos and production.',
     author: {
       '@type': 'Person',
       name: 'Juan',
@@ -50,10 +50,9 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
       <h1 className="mb-10 text-2xl font-semibold tracking-tighter">About me</h1>
-      <p className="mb-5 text-md leading-7 text-neutral-800 dark:text-neutral-200">
-        Hi, I'm Juan. Father of two, husband, and professional overthinker. I
-        spend most of my time building products as an engineer, currently
-        working on security tools at{' '}
+      <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
+        Hi, I'm Juan. Father of two, husband, and product engineer. I'm working
+        on security tools at{' '}
         <Link
           href="https://corgea.com"
           target="_blank"
@@ -61,24 +60,27 @@ export default function Page() {
           className="underline decoration-neutral-400 underline-offset-2 transition-colors hover:text-neutral-600 dark:decoration-neutral-600 dark:hover:text-neutral-300"
         >
           Corgea
-        </Link>{' '}
-        to help fix vulnerabilities in large codebases with agents and other
-        automation. This is where I share what I'm learning along the way: the
-        decisions, the trade-offs, and the lessons that don't usually make it
-        into the docs.
+        </Link>
+        , including agents and other automation, to help fix vulnerabilities in
+        large codebases.
       </p>
-      <p className="mb-5 text-md leading-7 text-neutral-800 dark:text-neutral-200">
-        Turns out being a dad twice over and being an engineer have more in
-        common than you'd think. Both require debugging mysterious issues at 3
-        AM, patience with unpredictable behavior, and the ability to explain
-        things in five different ways until something clicks.
+      <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
+        I'm interested in the gap between what demos promise and what production
+        systems survive. This is where I write through what I'm learning:
+        agents, security, product decisions, trade-offs, and the parts of
+        building that do not fit neatly in docs.
+      </p>
+      <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
+        Being a dad twice over has made me more patient with systems that do not
+        behave the way the manual says they should. That turns out to be useful
+        at work too.
       </p>
       <div className="my-12 w-full">
         <h2 className="mb-3 text-xl font-semibold tracking-tight">
           Start here
         </h2>
         <p className="mb-6 text-sm text-neutral-600 dark:text-neutral-400">
-          If you only read one thing, make it this :)
+          A useful place to start.
         </p>
         <div className="space-y-6">
           {highlights.map((item) => (

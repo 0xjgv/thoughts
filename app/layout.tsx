@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     template: '%s | 0xjgv',
     default: '0xjgv'
   },
-  description: 'My corner of the internet where I overthink things in public.',
+  description: 'Notes on agents, security, product decisions, and the gap between demos and production.',
   openGraph: {
-    description: 'My corner of the internet where I overthink things in public.',
+    description: 'Notes on agents, security, product decisions, and the gap between demos and production.',
     siteName: '0xjgv',
     title: '0xjgv',
     locale: 'en_US',

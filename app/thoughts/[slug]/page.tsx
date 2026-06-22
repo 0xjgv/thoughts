@@ -145,7 +145,7 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
           {post.metadata.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs text-neutral-500 dark:text-neutral-500"
+              className="text-xs text-neutral-500 dark:text-neutral-400"
             >
               {tag}
             </span>
