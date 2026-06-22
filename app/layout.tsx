@@ -64,7 +64,7 @@ export default async function RootLayout({
       )}
       suppressHydrationWarning
     >
-      <body className="antialiased max-w-xl mx-auto p-3 min-h-screen">
+      <body className="antialiased max-w-xl mx-auto min-h-screen px-6 py-8 sm:py-12">
         <ThemeProvider>
           <a
             href="#main-content"
@@ -72,7 +72,7 @@ export default async function RootLayout({
           >
             Skip to main content
           </a>
-          <main className="flex-auto min-w-0 flex flex-col justify-center p-3">
+          <main className="flex-auto min-w-0 flex flex-col justify-center">
             <Navbar />
             <div id="main-content">
               {children}

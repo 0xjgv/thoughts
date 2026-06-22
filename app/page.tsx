@@ -38,7 +38,7 @@ export default function Page() {
   }
 
   return (
-    <section className="flex flex-col items-center justify-center animate-fade-in">
+    <section className="flex flex-col animate-fade-in">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -49,44 +49,44 @@ export default function Page() {
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
-      <h1 className="mb-8 text-2xl font-semibold tracking-tighter">About me</h1>
-      <p className="mb-4 text-justify text-md">
+      <h1 className="mb-10 text-2xl font-semibold tracking-tighter">About me</h1>
+      <p className="mb-5 text-md leading-7 text-neutral-800 dark:text-neutral-200">
         Hi, I'm Juan. Father, husband, sports enthusiast, and professional
         overthinker. I spend most of my time building products as an engineer,
         somewhere between product development, data, and security. This is where
         I share what I'm learning along the way: the decisions, the trade-offs,
         and the lessons that don't usually make it into the docs.
       </p>
-      <p className="mb-4 text-justify text-md">
+      <p className="mb-5 text-md leading-7 text-neutral-800 dark:text-neutral-200">
         Turns out being a dad and being an engineer have more in common than
         you'd think. Both require debugging mysterious issues at 3 AM, patience
         with unpredictable behavior, and the ability to explain things in five
         different ways until something clicks.
       </p>
-      <div className="my-8 w-full">
-        <h2 className="mb-2 text-xl font-semibold tracking-tight">
+      <div className="my-12 w-full">
+        <h2 className="mb-3 text-xl font-semibold tracking-tight">
           Start here
         </h2>
-        <p className="mb-4 text-sm text-neutral-600 dark:text-neutral-400">
+        <p className="mb-6 text-sm text-neutral-600 dark:text-neutral-400">
           If you only read one thing, make it this :)
         </p>
-        <div className="space-y-3">
+        <div className="space-y-6">
           {highlights.map((item) => (
             <Link
               key={item.slug}
               href={`/thoughts/${item.slug}`}
-              className="block rounded-lg border border-neutral-200 dark:border-neutral-800 bg-neutral-50 dark:bg-neutral-900 p-4 transition-colors hover:border-neutral-400 dark:hover:border-neutral-600"
+              className="group block transition-colors"
             >
-              <p className="font-medium text-neutral-900 dark:text-neutral-100">
+              <p className="font-medium text-neutral-900 transition-colors group-hover:text-neutral-600 dark:text-neutral-100 dark:group-hover:text-neutral-300">
                 {item.title}
               </p>
-              <p className="mt-1 text-sm text-neutral-600 dark:text-neutral-400">
+              <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
                 {item.hook}
               </p>
             </Link>
           ))}
         </div>
-        <p className="mt-3 text-sm">
+        <p className="mt-5 text-sm">
           <Link
             href="/thoughts"
             className="text-neutral-700 dark:text-neutral-200 underline decoration-neutral-400 dark:decoration-neutral-600 underline-offset-2"
@@ -95,7 +95,7 @@ export default function Page() {
           </Link>
         </p>
       </div>
-      <div className="my-8 self-start">
+      <div className="my-12 w-full">
         <ThoughtsPosts limit={3} />
       </div>
     </section>

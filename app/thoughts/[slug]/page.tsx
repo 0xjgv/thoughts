@@ -132,7 +132,7 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
       <h1 className="title font-semibold text-2xl tracking-tighter">
         {post.metadata.title}
       </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
+      <div className="flex justify-between items-center mt-3 mb-10 text-sm">
         <p className="text-sm text-neutral-600 dark:text-neutral-400">
           {formatDate(post.metadata.publishedAt)}
         </p>
@@ -141,11 +141,11 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
         </p>
       </div>
       {post.metadata.tags && post.metadata.tags.length > 0 && (
-        <div className="flex flex-wrap gap-1 mb-8">
+        <div className="flex flex-wrap gap-3 mb-10">
           {post.metadata.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs text-neutral-600 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-2 py-1 rounded-full"
+              className="text-xs text-neutral-500 dark:text-neutral-500"
             >
               {tag}
             </span>
@@ -156,7 +156,7 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
-      <div className="mt-8 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+      <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
         <ShareButtons
           title={post.metadata.title}
           url={`${baseUrl}/thoughts/${post.slug}`}
