@@ -51,17 +51,27 @@ export default function Page() {
       />
       <h1 className="mb-10 text-2xl font-semibold tracking-tighter">About me</h1>
       <p className="mb-5 text-md leading-7 text-neutral-800 dark:text-neutral-200">
-        Hi, I'm Juan. Father, husband, sports enthusiast, and professional
-        overthinker. I spend most of my time building products as an engineer,
-        somewhere between product development, data, and security. This is where
-        I share what I'm learning along the way: the decisions, the trade-offs,
-        and the lessons that don't usually make it into the docs.
+        Hi, I'm Juan. Father of two, husband, and professional overthinker. I
+        spend most of my time building products as an engineer, currently
+        working on security tools at{' '}
+        <Link
+          href="https://corgea.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-neutral-400 underline-offset-2 transition-colors hover:text-neutral-600 dark:decoration-neutral-600 dark:hover:text-neutral-300"
+        >
+          Corgea
+        </Link>{' '}
+        to help fix vulnerabilities in large codebases with agents and other
+        automation. This is where I share what I'm learning along the way: the
+        decisions, the trade-offs, and the lessons that don't usually make it
+        into the docs.
       </p>
       <p className="mb-5 text-md leading-7 text-neutral-800 dark:text-neutral-200">
-        Turns out being a dad and being an engineer have more in common than
-        you'd think. Both require debugging mysterious issues at 3 AM, patience
-        with unpredictable behavior, and the ability to explain things in five
-        different ways until something clicks.
+        Turns out being a dad twice over and being an engineer have more in
+        common than you'd think. Both require debugging mysterious issues at 3
+        AM, patience with unpredictable behavior, and the ability to explain
+        things in five different ways until something clicks.
       </p>
       <div className="my-12 w-full">
         <h2 className="mb-3 text-xl font-semibold tracking-tight">
