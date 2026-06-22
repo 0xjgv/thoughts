@@ -5,17 +5,17 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Some things I have built.',
+  description: 'Security tools, agent infrastructure, and quality guardrails.',
   openGraph: {
     title: 'Projects',
-    description: 'Some things I have built.',
+    description: 'Security tools, agent infrastructure, and quality guardrails.',
     type: 'website',
     url: `${baseUrl}/projects`,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Projects',
-    description: 'Some things I have built.',
+    description: 'Security tools, agent infrastructure, and quality guardrails.',
   },
   alternates: {
     canonical: `${baseUrl}/projects`,
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'Projects',
-    description: 'Some things I have built.',
+    description: 'Security tools, agent infrastructure, and quality guardrails.',
     url: `${baseUrl}/projects`,
     mainEntity: {
       '@type': 'ItemList',
