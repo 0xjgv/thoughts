@@ -5,17 +5,17 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Projects',
-  description: 'Some things I have built.',
+  description: 'Security tools, agent infrastructure, and quality guardrails.',
   openGraph: {
     title: 'Projects',
-    description: 'Some things I have built.',
+    description: 'Security tools, agent infrastructure, and quality guardrails.',
     type: 'website',
     url: `${baseUrl}/projects`,
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Projects',
-    description: 'Some things I have built.',
+    description: 'Security tools, agent infrastructure, and quality guardrails.',
   },
   alternates: {
     canonical: `${baseUrl}/projects`,
@@ -55,7 +55,7 @@ export default function ProjectsPage() {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
     name: 'Projects',
-    description: 'Some things I have built.',
+    description: 'Security tools, agent infrastructure, and quality guardrails.',
     url: `${baseUrl}/projects`,
     mainEntity: {
       '@type': 'ItemList',
@@ -89,13 +89,13 @@ export default function ProjectsPage() {
           Projects coming soon.
         </p>
       ) : (
-        <div className="animate-stagger space-y-6">
+        <div className="animate-stagger space-y-9">
           {sortedProjects.map((project) => (
             <div
               key={project.slug}
               className="group"
             >
-              <div className="flex flex-col space-y-2">
+              <div className="flex flex-col space-y-3">
                 <div className="flex items-start justify-between gap-4">
                   <h2 className="font-medium text-neutral-900 dark:text-neutral-100">
                     {project.metadata.title}
@@ -125,21 +125,9 @@ export default function ProjectsPage() {
                     )}
                   </div>
                 </div>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                <p className="text-sm leading-6 text-neutral-600 dark:text-neutral-400">
                   {project.metadata.description}
                 </p>
-                {project.metadata.tags && project.metadata.tags.length > 0 && (
-                  <div className="flex flex-wrap gap-1">
-                    {project.metadata.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="text-xs text-neutral-500 dark:text-neutral-400 bg-neutral-100 dark:bg-neutral-800 px-1.5 py-0.5 rounded"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             </div>
           ))}

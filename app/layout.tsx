@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     template: '%s | 0xjgv',
     default: '0xjgv'
   },
-  description: 'My corner of the internet where I overthink things in public.',
+  description: 'Notes on agents, security, product decisions, and the gap between demos and production.',
   openGraph: {
-    description: 'My corner of the internet where I overthink things in public.',
+    description: 'Notes on agents, security, product decisions, and the gap between demos and production.',
     siteName: '0xjgv',
     title: '0xjgv',
     locale: 'en_US',
@@ -64,7 +64,7 @@ export default async function RootLayout({
       )}
       suppressHydrationWarning
     >
-      <body className="antialiased max-w-xl mx-auto p-3 min-h-screen">
+      <body className="antialiased max-w-xl mx-auto min-h-screen px-6 py-8 sm:py-12">
         <ThemeProvider>
           <a
             href="#main-content"
@@ -72,7 +72,7 @@ export default async function RootLayout({
           >
             Skip to main content
           </a>
-          <main className="flex-auto min-w-0 flex flex-col justify-center p-3">
+          <main className="flex-auto min-w-0 flex flex-col justify-center">
             <Navbar />
             <div id="main-content">
               {children}

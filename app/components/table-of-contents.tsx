@@ -44,11 +44,11 @@ export function TableOfContents() {
   if (headings.length < 3) return null
 
   return (
-    <nav className="mb-8 p-4 bg-neutral-50 dark:bg-neutral-900 rounded-lg">
-      <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 mb-2">
+    <nav className="mb-10 border-l border-neutral-200 py-1 pl-4 dark:border-neutral-800">
+      <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 mb-3">
         Contents
       </p>
-      <ul className="space-y-1">
+      <ul className="space-y-2">
         {headings.map((heading) => (
           <li
             key={heading.id}
