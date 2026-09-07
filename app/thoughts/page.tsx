@@ -1,8 +1,12 @@
 import { ThoughtsPosts } from 'app/components/posts'
+import { baseUrl } from 'app/sitemap'
 
 export const metadata = {
   title: 'Thoughts',
-  description: 'Read some of my thoughts.'
+  description: 'Read some of my thoughts.',
+  alternates: {
+    canonical: `${baseUrl}/thoughts`,
+  },
 }
 
 export default function Page() {

@@ -1,7 +1,7 @@
 import { getThoughtPosts } from 'app/thoughts/utils'
 import { getProjects } from 'app/projects/utils'
 
-export const baseUrl = 'https://0xjgv.vercel.app'
+export const baseUrl = 'https://0xjgv.space'
 
 export default async function sitemap() {
   const thoughts = getThoughtPosts().map((post) => ({

@@ -20,17 +20,17 @@ export async function GET() {
       }
       return 1
     })
+    // Keep GUIDs stable across the domain change so feed readers do not duplicate posts.
     .map(
       (post) =>
         `<item>
           <title>${escapeXml(post.metadata.title)}</title>
           <link>${baseUrl}/thoughts/${post.slug}</link>
-          <guid isPermaLink="true">${baseUrl}/thoughts/${post.slug}</guid>
+          <guid isPermaLink="true">https://0xjgv.vercel.app/thoughts/${post.slug}</guid>
           <description><![CDATA[${post.metadata.summary || ''}]]></description>
           <pubDate>${new Date(
             post.metadata.publishedAt
           ).toUTCString()}</pubDate>
-          <author>juan@0xjgv.com (Juan)</author>
         </item>`
     )
     .join('\n')
@@ -44,8 +44,6 @@ export async function GET() {
         <language>en-us</language>
         <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
         <atom:link href="${baseUrl}/rss" rel="self" type="application/rss+xml"/>
-        <managingEditor>juan@0xjgv.com (Juan)</managingEditor>
-        <webMaster>juan@0xjgv.com (Juan)</webMaster>
         ${itemsXml}
     </channel>
   </rss>`

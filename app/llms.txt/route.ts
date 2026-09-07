@@ -19,11 +19,11 @@ export async function GET() {
 
   const llmsTxt = `# 0xjgv
 
-> Personal website of Juan, a software engineer passionate about web development, data, security, and AI/ML.
+> Personal website of Juan, a product engineer writing about agents, security, product decisions, and the gap between demos and production.
 
 ## About
 
-This is a personal portfolio and blog website. The author is Juan, a father, husband, and sports enthusiast who works as a software engineer.
+Juan is a father of two, husband, and product engineer working on security tools at Corgea, including agents and automation that help fix vulnerabilities in large codebases.
 
 ## Main Sections
 

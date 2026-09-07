@@ -1,4 +1,6 @@
-# Portfolio Thoughts Starter
+# Thoughts — Personal Website
+
+Juan's personal website at [0xjgv.space](https://0xjgv.space), with thoughts and projects.
 
 - MDX and Markdown support
 - Optimized for SEO (sitemap, robots, JSON-LD schema)
@@ -17,7 +19,8 @@ Develop the app:
 bun dev
 ```
 
-Deploy the app:
+Build and run the production app locally:
 ```bash
-bun deploy
+bun build
+bun start
 ```
