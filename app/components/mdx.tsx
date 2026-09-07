@@ -100,7 +100,7 @@ function Pre({ children, ...props }) {
   )
 }
 
-function slugify(str) {
+export function slugify(str: string) {
   return str
     .toString()
     .toLowerCase()

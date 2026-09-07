@@ -1,4 +1,6 @@
-import { CustomMDX } from 'app/components/mdx'
+import { CustomMDX, slugify } from 'app/components/mdx'
+import Link from 'next/link'
+import { getProjects } from 'app/projects/utils'
 import { ShareButtons } from 'app/components/share-buttons'
 import { baseUrl } from 'app/sitemap'
 import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
@@ -59,11 +61,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function Thoughts({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const post = getThoughtPosts().find((post) => post.slug === slug)
+  const posts = getThoughtPosts()
+  const post = posts.find((post) => post.slug === slug)
 
   if (!post) {
     notFound()
   }
+
+  const nextThought = posts.find(
+    (candidate) => candidate.slug === post.metadata.nextThought && candidate.slug !== slug
+  )
+  const relatedProject = post.metadata.relatedProject
+    ? getProjects().find((project) => project.slug === post.metadata.relatedProject)
+    : undefined
 
   return (
     <section className="animate-fade-in">
@@ -129,7 +139,7 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
           })
         }}
       />
-      <h1 className="title font-semibold text-2xl tracking-tighter">
+      <h1 id={slugify(post.metadata.title)} className="title font-semibold text-2xl tracking-tighter">
         {post.metadata.title}
       </h1>
       <div className="flex justify-between items-center mt-3 mb-10 text-sm">
@@ -152,11 +162,37 @@ export default async function Thoughts({ params }: { params: Promise<{ slug: str
           ))}
         </div>
       )}
-      <TableOfContents />
+      <TableOfContents key={post.slug} />
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
       <div className="mt-12 pt-8 border-t border-neutral-200 dark:border-neutral-800">
+        {nextThought && (
+          <div className="mb-8">
+            <h2 className="mb-3 text-sm text-neutral-600 dark:text-neutral-400">Read next</h2>
+            <Link
+              href={`/thoughts/${nextThought.slug}`}
+              className="font-medium underline decoration-neutral-400 underline-offset-4 hover:text-neutral-600 dark:decoration-neutral-600 dark:hover:text-neutral-300"
+            >
+              {nextThought.metadata.title}
+            </Link>
+            <p className="mt-2 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+              {nextThought.metadata.summary}
+            </p>
+          </div>
+        )}
+        {relatedProject && (
+          <p className="mb-8 text-sm leading-6 text-neutral-600 dark:text-neutral-400">
+            Put this into practice:{' '}
+            <Link
+              href={`/projects#${relatedProject.slug}`}
+              className="text-neutral-800 underline decoration-neutral-400 underline-offset-4 hover:text-neutral-600 dark:text-neutral-200 dark:decoration-neutral-600 dark:hover:text-neutral-300"
+            >
+              {relatedProject.metadata.title}
+            </Link>
+            {' — '}{relatedProject.metadata.description}
+          </p>
+        )}
         <ShareButtons
           title={post.metadata.title}
           url={`${baseUrl}/thoughts/${post.slug}`}

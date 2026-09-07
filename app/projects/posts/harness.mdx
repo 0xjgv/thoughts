@@ -6,3 +6,28 @@ github: 'https://github.com/0xjgv/harness'
 featured: true
 order: 3
 ---
+
+### The problem: checks that drift
+
+An agent can finish an edit while formatting, types, and tests disagree about whether the work is ready. Repeating the instructions in a prompt leaves the checks dependent on whoever remembers to run them.
+
+### The work: a shared command contract
+
+Harness puts the checks in the project. Its language templates expose the same small set of commands, backed by each language's tools. The Bun template, for example, combines formatting, type checking, and tests behind one entry point.
+
+### The trade-off: repair locally, verify in CI
+
+A local check can fix formatting and keep an edit moving. CI needs to judge the submitted code. Harness separates those jobs: `check` can change files; `ci` verifies them without applying fixes. The cost is maintaining language-specific runners behind the shared commands.
+
+### Harness in practice
+
+Inside a project using the Bun template:
+
+```bash
+bun run check
+bun run ci
+```
+
+The first command runs the local feedback loop. The second checks whether the result meets the project's CI gates.
+
+[Read the command contract and templates](https://github.com/0xjgv/harness#the-5-script-contract).

@@ -1,23 +1,27 @@
 import { formatDate, getThoughtPosts } from 'app/thoughts/utils'
 import Link from 'next/link'
 
-export function ThoughtsPosts({ limit }: { limit?: number } = {}) {
+export function ThoughtsPosts({
+  limit,
+  excludeSlugs = [],
+  order = 'featured',
+}: {
+  limit?: number
+  excludeSlugs?: string[]
+  order?: 'featured' | 'recent'
+} = {}) {
   let allThoughts = getThoughtPosts()
 
   return (
     <div className="animate-stagger space-y-7">
       {allThoughts
+        .filter((post) => !excludeSlugs.includes(post.slug))
         .sort((a, b) => {
-          // Featured posts come first
-          if (a.metadata.featured && !b.metadata.featured) return -1
-          if (!a.metadata.featured && b.metadata.featured) return 1
-          // Then sort by date
-          if (
-            new Date(a.metadata.publishedAt) > new Date(b.metadata.publishedAt)
-          ) {
-            return -1
+          if (order === 'featured') {
+            if (a.metadata.featured && !b.metadata.featured) return -1
+            if (!a.metadata.featured && b.metadata.featured) return 1
           }
-          return 1
+          return Date.parse(b.metadata.publishedAt) - Date.parse(a.metadata.publishedAt)
         })
         .slice(0, limit)
         .map((post) => (

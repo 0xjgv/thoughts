@@ -6,3 +6,28 @@ github: 'https://github.com/0xjgv/spok'
 featured: true
 order: 4
 ---
+
+### The problem: requirements trapped in chat
+
+An agent can keep writing code while the meaning of “done” shifts between messages. A long conversation is a fragile place to keep the agreement about what should ship.
+
+### The work: keep the agreement with the code
+
+Spok gives a change a proposal, specifications, a design, and a checklist in the repository. Its workflow separates exploring an idea, proposing a change, applying one chunk, and archiving the result.
+
+### The trade-off: a checkpoint between chunks
+
+Each apply invocation completes one chunk and stops. That adds a checkpoint before more work begins. The benefit is a smaller result to inspect, with the remaining work still explicit. When the change is complete, archiving folds the new behavior into the project's lasting specifications.
+
+### Spok in practice
+
+After setting up Spok, ask your coding assistant:
+
+```text
+/spok-propose add-dark-mode
+/spok-apply
+```
+
+Inspect the first completed chunk, repeat `/spok-apply` for the remaining chunks, then run `/spok-archive` to update the specifications.
+
+[See the documented workflow](https://github.com/0xjgv/spok#see-it-in-action).

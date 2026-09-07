@@ -51,6 +51,11 @@ export default function Page() {
       />
       <h1 className="mb-10 text-2xl font-semibold tracking-tighter">About me</h1>
       <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
+        I'm interested in the gap between what demos promise and what production
+        systems survive. I write about agents, security, and the decisions that
+        shape the things we build.
+      </p>
+      <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
         Hi, I'm Juan. Father of two, husband, and product engineer. I'm working
         on security tools at{' '}
         <Link
@@ -65,23 +70,25 @@ export default function Page() {
         large codebases.
       </p>
       <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
-        I'm interested in the gap between what demos promise and what production
-        systems survive. This is where I write through what I'm learning:
-        agents, security, product decisions, trade-offs, and the parts of
-        building that do not fit neatly in docs.
-      </p>
-      <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
         Being a dad twice over has made me more patient with systems that do not
         behave the way the manual says they should. That turns out to be useful
         at work too.
+      </p>
+      <p className="text-base leading-7 text-neutral-800 dark:text-neutral-200">
+        Working on agent reliability or security?{' '}
+        <Link
+          href="https://www.linkedin.com/in/jgv/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline decoration-neutral-400 underline-offset-2 hover:text-neutral-600 dark:decoration-neutral-600 dark:hover:text-neutral-300"
+        >
+          Let's compare notes.
+        </Link>
       </p>
       <div className="my-12 w-full">
         <h2 className="mb-3 text-xl font-semibold tracking-tight">
           Start here
         </h2>
-        <p className="mb-6 text-sm text-neutral-600 dark:text-neutral-400">
-          A useful place to start.
-        </p>
         <div className="space-y-6">
           {highlights.map((item) => (
             <Link
@@ -108,7 +115,12 @@ export default function Page() {
         </p>
       </div>
       <div className="my-12 w-full">
-        <ThoughtsPosts limit={3} />
+        <h2 className="mb-6 text-xl font-semibold tracking-tight">Recent writing</h2>
+        <ThoughtsPosts
+          limit={3}
+          excludeSlugs={highlights.map((item) => item.slug)}
+          order="recent"
+        />
       </div>
     </section>
   )

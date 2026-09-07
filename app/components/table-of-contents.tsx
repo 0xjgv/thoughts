@@ -44,7 +44,7 @@ export function TableOfContents() {
   if (headings.length < 3) return null
 
   return (
-    <nav className="mb-10 border-l border-neutral-200 py-1 pl-4 dark:border-neutral-800">
+    <nav aria-label="Article contents" className="mb-10 border-l border-neutral-200 py-1 pl-4 dark:border-neutral-800">
       <p className="text-sm font-medium text-neutral-900 dark:text-neutral-100 mb-3">
         Contents
       </p>
@@ -61,12 +61,6 @@ export function TableOfContents() {
                   ? 'text-neutral-900 dark:text-neutral-100'
                   : 'text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300'
               }`}
-              onClick={(e) => {
-                e.preventDefault()
-                document.getElementById(heading.id)?.scrollIntoView({
-                  behavior: 'smooth'
-                })
-              }}
             >
               {heading.text}
             </a>

@@ -4,13 +4,15 @@ title: "Self-Correcting Isn't Self-Healing"
 publishedAt: '2026-04-10'
 tags: agents, learning, harness, self-healing
 featured: true
+nextThought: the-gradient
+relatedProject: harness
 ---
-
-## Self-Correcting Isn't Self-Healing
 
 A lot of people talk about AI agents as if they are on the verge of becoming organisms. They aren't. But the comparison is useful, because it points to a real distinction.
 
 Agents today are increasingly good at self-correction. They hit an error, inspect the result, try again, and continue. A tool call fails, so they change the parameters. A plan stalls, so they re-route. A chain of reasoning breaks, so they backtrack and produce another one. This is already valuable. In practice, a lot of competence is just the ability not to stop at the first obstacle.
+
+## Recovery is not learning
 
 But self-correction is different from self-healing.
 
@@ -28,6 +30,8 @@ The agent fails once, discovers a better method, records the lesson, and never p
 
 That is the dream.
 
+## What counts as a lesson
+
 The problem is that reality is messier than the slogan.
 
 First, there is almost no such thing as "the same error again." Real failures do not usually repeat — they recur in families. An API timeout, a rate limit, a schema mismatch, and an authentication failure may all belong to the same broader class of problem: bad assumptions about external tools.
@@ -35,6 +39,8 @@ First, there is almost no such thing as "the same error again." Real failures do
 A system that memorizes one fix too literally has not healed. It has just cached a workaround.
 
 Second, learning requires deciding what counts as a lesson. Suppose an agent hits an error, tries a different method, and succeeds. What exactly should it remember? Is the first method bad? Is the second better? Is it only under some hidden condition that the second is safer? From one success, you usually can't tell. A lot of "self-healing" proposals are really just proposals to let the system rewrite itself based on anecdotal evidence.
+
+## Where errors come from
 
 There is another problem hidden inside this one. Before the system can learn from an error, it has to ask where the error came from. Not every failure is really the agent's fault. Sometimes the agent made a bad inference. But sometimes the tool was unclear, the API was underspecified, the harness passed bad context, or the environment changed underneath everything. A vague tool description can produce the same outward failure as a bad decision. So can a harness that withholds state, truncates context, or rewards shallow retries.
 
@@ -44,7 +50,11 @@ Without this step, "self-healing" turns into superstition. The system sees a fai
 
 Humans do this, too, of course. We all form superstitions from small samples. The difference is that we are already familiar with human irrationality. When a machine does it, people tend to call it intelligence.
 
+## When memory becomes baggage
+
 Third, there is a hidden cost problem. People describe self-healing as economical, and it can be. But only if the learning generalizes. Otherwise, you are just building a larger and larger pile of local patches: retry rules, exception notes, memory snippets, special-case policies. The system looks more experienced, but also more fragile. It becomes like an old codebase that "knows" how to survive only because no one dares touch half the conditionals.
+
+## Learning changes policy
 
 So the missing capability in agents is probably not self-healing in the biological sense. That metaphor is too flattering. What they really need is something more prosaic and more difficult: reliable error abstraction and correct error attribution.
 

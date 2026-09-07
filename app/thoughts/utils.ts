@@ -9,6 +9,8 @@ type Metadata = {
   tags?: string[]
   readingTime?: number
   featured?: boolean
+  nextThought?: string
+  relatedProject?: string
 }
 
 function parseFrontmatter(fileContent: string) {
@@ -33,6 +35,8 @@ function parseFrontmatter(fileContent: string) {
     publishedAt: rawMetadata.publishedAt,
     summary: rawMetadata.summary,
     image: rawMetadata.image,
+    nextThought: rawMetadata.nextThought,
+    relatedProject: rawMetadata.relatedProject,
     tags:
       rawMetadata.tags && typeof rawMetadata.tags === 'string'
         ? rawMetadata.tags.split(',').map((tag) => tag.trim())

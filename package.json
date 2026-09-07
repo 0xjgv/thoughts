@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "check:links": "node scripts/check-links.mjs",
+    "test:links": "node --test scripts/check-links.test.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.18",

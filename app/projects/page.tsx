@@ -2,6 +2,7 @@ import { getProjects } from './utils'
 import Link from 'next/link'
 import { baseUrl } from 'app/sitemap'
 import type { Metadata } from 'next'
+import { CustomMDX } from 'app/components/mdx'
 
 export const metadata: Metadata = {
   title: 'Projects',
@@ -93,7 +94,8 @@ export default function ProjectsPage() {
           {sortedProjects.map((project) => (
             <div
               key={project.slug}
-              className="group"
+              id={project.slug}
+              className="group scroll-mt-8"
             >
               <div className="flex flex-col space-y-3">
                 <div className="flex items-start justify-between gap-4">
@@ -128,6 +130,16 @@ export default function ProjectsPage() {
                 <p className="text-sm leading-6 text-neutral-600 dark:text-neutral-400">
                   {project.metadata.description}
                 </p>
+                {project.content && (
+                  <details className="text-sm">
+                    <summary className="w-fit cursor-pointer text-neutral-700 underline decoration-neutral-400 underline-offset-4 hover:text-neutral-900 dark:text-neutral-300 dark:decoration-neutral-600 dark:hover:text-neutral-100">
+                      How {project.metadata.title} works
+                    </summary>
+                    <div className="prose mt-6">
+                      <CustomMDX source={project.content} />
+                    </div>
+                  </details>
+                )}
               </div>
             </div>
           ))}
