@@ -14,16 +14,17 @@ export async function GET() {
     .join('\n')
 
   const projectsList = projects
+    .sort((a, b) => (a.metadata.order || 0) - (b.metadata.order || 0))
     .map(project => `- ${project.metadata.title}: ${project.metadata.description}`)
     .join('\n')
 
   const llmsTxt = `# 0xjgv
 
-> Personal website of Juan, a product engineer writing about agents, security, product decisions, and the gap between demos and production.
+> Making AI agents trustworthy, secure, one tool at a time.
 
 ## About
 
-Juan is a father of two, husband, and product engineer working on security tools at Corgea, including agents and automation that help fix vulnerabilities in large codebases.
+Juan is a Product Security Engineer at Corgea, a father of two, and a husband. He builds tools for agent workflows, security, and code quality.
 
 ## Main Sections
 

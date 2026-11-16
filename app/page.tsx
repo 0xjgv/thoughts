@@ -16,7 +16,12 @@ export default function Page() {
     '@type': 'Person',
     name: 'Juan',
     url: baseUrl,
-    jobTitle: 'Product Engineer',
+    jobTitle: 'Product Security Engineer',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Corgea',
+      url: 'https://corgea.com/',
+    },
     knowsAbout: ['Product Engineering', 'Data', 'Security', 'AI/ML'],
     sameAs: [
       'https://www.linkedin.com/in/jgv/',
@@ -30,7 +35,7 @@ export default function Page() {
     '@type': 'WebSite',
     name: '0xjgv',
     url: baseUrl,
-    description: 'Notes on agents, security, product decisions, and the gap between demos and production.',
+    description: 'Making AI agents trustworthy, secure, one tool at a time.',
     author: {
       '@type': 'Person',
       name: 'Juan',
@@ -51,23 +56,28 @@ export default function Page() {
       />
       <h1 className="mb-10 text-2xl font-semibold tracking-tighter">About me</h1>
       <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
-        I'm interested in the gap between what demos promise and what production
-        systems survive. I write about agents, security, and the decisions that
-        shape the things we build.
+        Making AI agents trustworthy, secure, one tool at a time.
       </p>
       <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
-        Hi, I'm Juan. Father of two, husband, and product engineer. I'm working
-        on security tools at{' '}
+        Hi, I'm Juan. Father of two, husband, and Product Security Engineer at{' '}
         <Link
-          href="https://corgea.com"
+          href="https://corgea.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="underline decoration-neutral-400 underline-offset-2 transition-colors hover:text-neutral-600 dark:decoration-neutral-600 dark:hover:text-neutral-300"
         >
           Corgea
         </Link>
-        , including agents and other automation, to help fix vulnerabilities in
-        large codebases.
+        .
+      </p>
+      <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
+        I build tools for agent workflows, security, and code quality.{' '}
+        <Link
+          href="/projects"
+          className="underline decoration-neutral-400 underline-offset-2 hover:text-neutral-600 dark:decoration-neutral-600 dark:hover:text-neutral-300"
+        >
+          Explore my projects.
+        </Link>
       </p>
       <p className="mb-5 text-base leading-7 text-neutral-800 dark:text-neutral-200">
         Being a dad twice over has made me more patient with systems that do not
