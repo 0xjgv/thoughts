@@ -16,9 +16,9 @@ export const metadata: Metadata = {
     template: '%s | 0xjgv',
     default: '0xjgv'
   },
-  description: 'Notes on agents, security, product decisions, and the gap between demos and production.',
+  description: 'Making AI agents trustworthy, secure, one tool at a time.',
   openGraph: {
-    description: 'Notes on agents, security, product decisions, and the gap between demos and production.',
+    description: 'Making AI agents trustworthy, secure, one tool at a time.',
     siteName: '0xjgv',
     title: '0xjgv',
     locale: 'en_US',
